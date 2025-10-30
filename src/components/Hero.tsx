@@ -1,46 +1,130 @@
 import { Button } from '@/components/ui/button';
-import { ArrowRight, Sparkles, Zap, Code2 } from 'lucide-react';
-import heroImage from '@/assets/hero-bg.jpg';
+import { ArrowRight, Zap, Eye, Bell, Download, Gift, Sparkles } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
+import Autoplay from "embla-carousel-autoplay";
+import tech1 from '@/assets/tech-1.jpg';
+import tech2 from '@/assets/tech-2.jpg';
+import tech3 from '@/assets/tech-3.jpg';
+import tech4 from '@/assets/tech-4.jpg';
+import tech5 from '@/assets/tech-5.jpg';
+
+const techImages = [tech1, tech2, tech3, tech4, tech5];
 
 const Hero = () => {
-  return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden particle-bg pt-20">
-      {/* Background Image with Overlay */}
-      <div 
-        className="absolute inset-0 z-0"
-        style={{
-          backgroundImage: `url(${heroImage})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          opacity: 0.3
-        }}
-      />
-      <div className="absolute inset-0 bg-gradient-to-b from-background/50 via-background/80 to-background z-0" />
+  const [liveViewers, setLiveViewers] = useState(142);
+  const [quoteRequests, setQuoteRequests] = useState(38);
+  const [downloads, setDownloads] = useState(256);
+  const [showDiscount, setShowDiscount] = useState(false);
 
-      {/* Floating Elements */}
-      <div className="absolute top-20 left-10 w-20 h-20 rounded-full bg-primary/20 blur-3xl animate-float" />
-      <div className="absolute bottom-20 right-10 w-32 h-32 rounded-full bg-secondary/20 blur-3xl animate-float" style={{ animationDelay: '1s' }} />
-      <div className="absolute top-1/2 left-1/4 w-24 h-24 rounded-full bg-accent/20 blur-3xl animate-float" style={{ animationDelay: '2s' }} />
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setLiveViewers(prev => prev + Math.floor(Math.random() * 3));
+      if (Math.random() > 0.7) setQuoteRequests(prev => prev + 1);
+    }, 3000);
+
+    const discountTimer = setTimeout(() => setShowDiscount(true), 5000);
+
+    return () => {
+      clearInterval(interval);
+      clearTimeout(discountTimer);
+    };
+  }, []);
+
+  return (
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
+      {/* Animated Gradient Background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-primary/30 via-secondary/20 to-accent/30 animate-pulse-glow" />
+      <div className="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-background/50" />
+
+      {/* Live Stats Indicators */}
+      <div className="fixed top-24 right-4 z-50 space-y-3 animate-slide-in-right">
+        {/* Live Viewers */}
+        <div className="glass px-4 py-3 rounded-2xl flex items-center gap-3 glow-accent animate-float">
+          <div className="w-10 h-10 rounded-full bg-accent/20 flex items-center justify-center">
+            <Eye className="w-5 h-5 text-accent animate-pulse-glow" />
+          </div>
+          <div>
+            <div className="text-xs text-muted-foreground">Live Viewers</div>
+            <div className="text-lg font-bold gradient-text">{liveViewers}</div>
+          </div>
+        </div>
+
+        {/* Quote Requests */}
+        <div className="glass px-4 py-3 rounded-2xl flex items-center gap-3 glow-secondary animate-float" style={{ animationDelay: '0.5s' }}>
+          <div className="w-10 h-10 rounded-full bg-secondary/20 flex items-center justify-center">
+            <Bell className="w-5 h-5 text-secondary animate-pulse-glow" />
+          </div>
+          <div>
+            <div className="text-xs text-muted-foreground">Quote Requests</div>
+            <div className="text-lg font-bold text-secondary">{quoteRequests}</div>
+          </div>
+        </div>
+
+        {/* Downloads */}
+        <div className="glass px-4 py-3 rounded-2xl flex items-center gap-3 glow-primary animate-float" style={{ animationDelay: '1s' }}>
+          <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center">
+            <Download className="w-5 h-5 text-primary animate-pulse-glow" />
+          </div>
+          <div>
+            <div className="text-xs text-muted-foreground">Brochures</div>
+            <div className="text-lg font-bold text-primary">{downloads}</div>
+          </div>
+        </div>
+      </div>
+
+      {/* Special Offer Popup */}
+      {showDiscount && (
+        <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50 animate-scale-in">
+          <div className="glass p-8 rounded-3xl max-w-md glow-primary border-2 border-primary/50">
+            <button 
+              onClick={() => setShowDiscount(false)}
+              className="absolute top-4 right-4 text-muted-foreground hover:text-foreground"
+            >
+              ×
+            </button>
+            <div className="flex items-center gap-4 mb-4">
+              <div className="w-16 h-16 rounded-full bg-gradient-primary flex items-center justify-center animate-rotate-glow">
+                <Gift className="w-8 h-8 text-white" />
+              </div>
+              <div>
+                <h3 className="text-2xl font-bold gradient-text">Special Offer!</h3>
+                <p className="text-sm text-muted-foreground">Limited Time Only</p>
+              </div>
+            </div>
+            <p className="text-lg mb-6">
+              Get <span className="text-3xl font-bold text-accent">25% OFF</span> on your first project + Free AI Integration!
+            </p>
+            <Button className="w-full bg-gradient-primary text-white glow-primary">
+              Claim Your Offer Now
+              <Sparkles className="ml-2 w-5 h-5" />
+            </Button>
+          </div>
+        </div>
+      )}
 
       <div className="container mx-auto px-4 z-10">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left Content */}
           <div className="space-y-8 animate-slide-in-left">
-            {/* Badge */}
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass glow-primary">
               <Sparkles className="w-4 h-4 text-primary animate-pulse-glow" />
               <span className="text-sm text-foreground/90">AI-Powered Development</span>
             </div>
 
-            {/* Heading */}
             <h1 className="text-5xl md:text-7xl font-bold leading-tight">
               Build The{' '}
-              <span className="gradient-text">Future</span>
+              <span className="gradient-text animate-pulse-glow">Future</span>
               <br />
               Of Apps Today
             </h1>
 
-            {/* Description */}
             <p className="text-xl text-muted-foreground max-w-lg">
               Transform your ideas into reality with cutting-edge AI technology, stunning designs, 
               and lightning-fast development. Welcome to the next generation of app creation.
@@ -48,15 +132,15 @@ const Hero = () => {
 
             {/* Stats */}
             <div className="grid grid-cols-3 gap-6 pt-4">
-              <div className="text-center">
+              <div className="text-center animate-fade-in">
                 <div className="text-3xl font-bold gradient-text">500+</div>
                 <div className="text-sm text-muted-foreground mt-1">Projects</div>
               </div>
-              <div className="text-center">
+              <div className="text-center animate-fade-in" style={{ animationDelay: '0.2s' }}>
                 <div className="text-3xl font-bold gradient-text">100+</div>
                 <div className="text-sm text-muted-foreground mt-1">Clients</div>
               </div>
-              <div className="text-center">
+              <div className="text-center animate-fade-in" style={{ animationDelay: '0.4s' }}>
                 <div className="text-3xl font-bold gradient-text">99%</div>
                 <div className="text-sm text-muted-foreground mt-1">Success</div>
               </div>
@@ -80,37 +164,41 @@ const Hero = () => {
                 View Portfolio
               </Button>
             </div>
-
-            {/* Tech Icons */}
-            <div className="flex items-center gap-6 pt-6">
-              <div className="flex items-center gap-2 text-muted-foreground">
-                <Code2 className="w-5 h-5 text-primary" />
-                <span className="text-sm">React • Next.js • AI • Web3</span>
-              </div>
-            </div>
           </div>
 
-          {/* Right Content - 3D Mockup */}
+          {/* Right Content - Tech Carousel */}
           <div className="relative animate-scale-in hidden lg:block">
-            <div className="relative w-full h-[600px] flex items-center justify-center">
-              {/* Glow Effect */}
-              <div className="absolute inset-0 bg-gradient-primary opacity-20 blur-3xl animate-pulse-glow" />
-              
-              {/* Floating Card */}
-              <div className="relative glass rounded-3xl p-8 glow-primary transform hover:scale-105 transition-all duration-500">
-                <div className="w-64 h-96 bg-gradient-to-br from-primary/20 to-secondary/20 rounded-2xl flex items-center justify-center">
-                  <Code2 className="w-32 h-32 text-primary animate-float" />
-                </div>
-                
-                {/* Floating Icons */}
-                <div className="absolute -top-4 -left-4 w-16 h-16 glass rounded-2xl flex items-center justify-center glow-accent animate-float">
-                  <Sparkles className="w-8 h-8 text-accent" />
-                </div>
-                <div className="absolute -bottom-4 -right-4 w-16 h-16 glass rounded-2xl flex items-center justify-center glow-secondary animate-float" style={{ animationDelay: '1s' }}>
-                  <Zap className="w-8 h-8 text-secondary" />
-                </div>
-              </div>
-            </div>
+            <Carousel
+              plugins={[
+                Autoplay({
+                  delay: 3000,
+                }),
+              ]}
+              className="w-full"
+            >
+              <CarouselContent>
+                {techImages.map((image, index) => (
+                  <CarouselItem key={index}>
+                    <div className="relative glass rounded-3xl overflow-hidden glow-primary group">
+                      <img 
+                        src={image} 
+                        alt={`Technology ${index + 1}`}
+                        className="w-full h-[500px] object-cover group-hover:scale-110 transition-transform duration-700"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
+                      <div className="absolute bottom-6 left-6 right-6">
+                        <h3 className="text-2xl font-bold text-white mb-2">
+                          {['AI Neural Networks', 'Blockchain Technology', 'Cloud Computing', 'Mobile AR Apps', 'Quantum Computing'][index]}
+                        </h3>
+                        <p className="text-white/80">Next-generation technology solutions</p>
+                      </div>
+                    </div>
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+              <CarouselPrevious className="left-4 glass border-primary/50" />
+              <CarouselNext className="right-4 glass border-primary/50" />
+            </Carousel>
           </div>
         </div>
       </div>

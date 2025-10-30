@@ -4,6 +4,7 @@ import Services from '@/components/Services';
 import Portfolio from '@/components/Portfolio';
 import TechStack from '@/components/TechStack';
 import CTA from '@/components/CTA';
+import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
 import AIChatbot from '@/components/AIChatbot';
 
@@ -17,6 +18,7 @@ const Index = () => {
         <Portfolio />
         <TechStack />
         <CTA />
+        <Contact />
       </main>
       <Footer />
       <AIChatbot />

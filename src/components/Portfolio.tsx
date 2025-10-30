@@ -1,13 +1,16 @@
 import { ExternalLink, Github, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import appMockup from '@/assets/app-mockup.png';
+import project1 from '@/assets/project-1.png';
+import project2 from '@/assets/project-2.png';
+import project3 from '@/assets/project-3.png';
+import project4 from '@/assets/project-4.png';
 
 const projects = [
   {
     title: 'FinTech Pro',
     category: 'Financial App',
     description: 'AI-powered investment platform with real-time analytics and blockchain integration.',
-    image: appMockup,
+    image: project1,
     tags: ['React', 'AI', 'Blockchain'],
     gradient: 'from-primary to-secondary'
   },
@@ -15,7 +18,7 @@ const projects = [
     title: 'HealthHub AI',
     category: 'Healthcare',
     description: 'Telemedicine platform with AI diagnosis and patient management system.',
-    image: appMockup,
+    image: project2,
     tags: ['Next.js', 'AI', 'WebRTC'],
     gradient: 'from-secondary to-accent'
   },
@@ -23,7 +26,7 @@ const projects = [
     title: 'EduLearn',
     category: 'Education',
     description: 'Interactive learning platform with gamification and progress tracking.',
-    image: appMockup,
+    image: project3,
     tags: ['React Native', 'Firebase', 'ML'],
     gradient: 'from-accent to-primary'
   },
@@ -31,7 +34,7 @@ const projects = [
     title: 'ShopSmart',
     category: 'E-Commerce',
     description: 'Next-gen shopping experience with AR try-on and AI recommendations.',
-    image: appMockup,
+    image: project4,
     tags: ['Vue.js', 'AR', 'AI'],
     gradient: 'from-primary to-accent'
   }

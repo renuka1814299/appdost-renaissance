@@ -79,7 +79,7 @@ const Footer = () => {
         {/* Bottom Bar */}
         <div className="pt-8 border-t border-border/50">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-muted-foreground">
-            <p>© {currentYear} AppDost. All rights reserved. Built with ❤️ and AI.</p>
+            <p>© {currentYear} AppDost. All rights reserved. Built with ❤️ in <span className="text-primary font-semibold">INDIA</span></p>
             <div className="flex gap-6">
               <a href="#" className="hover:text-primary transition-colors">Privacy Policy</a>
               <a href="#" className="hover:text-primary transition-colors">Terms of Service</a>

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
-import { Menu, X, Sparkles } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
+import logo from '@/assets/appdost-logo.png';
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -30,11 +31,12 @@ const Header = () => {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <div className="flex items-center gap-2 group cursor-pointer">
-            <div className="w-10 h-10 rounded-lg bg-gradient-primary flex items-center justify-center glow-primary group-hover:scale-110 transition-transform">
-              <Sparkles className="w-6 h-6 text-white" />
-            </div>
-            <span className="text-2xl font-bold gradient-text">AppDost</span>
+          <div className="flex items-center gap-3 cursor-pointer">
+            <img 
+              src={logo} 
+              alt="AppDost - Complete IT Solution" 
+              className="h-12 w-auto hover:scale-105 transition-transform"
+            />
           </div>
 
           {/* Desktop Nav */}
