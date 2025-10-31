@@ -65,6 +65,59 @@ All colors MUST be HSL.
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     --transition-bounce: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
   }
+
+  .light {
+    /* Light Theme - Clean White Base */
+    --background: 0 0% 100%;
+    --foreground: 240 10% 10%;
+
+    /* Glass Cards */
+    --card: 0 0% 98%;
+    --card-foreground: 240 10% 10%;
+
+    --popover: 0 0% 98%;
+    --popover-foreground: 240 10% 10%;
+
+    /* Vibrant Primary */
+    --primary: 270 91% 55%;
+    --primary-foreground: 0 0% 100%;
+    --primary-glow: 270 91% 65%;
+
+    /* Bright Secondary */
+    --secondary: 200 98% 45%;
+    --secondary-foreground: 0 0% 100%;
+    --secondary-glow: 200 98% 55%;
+
+    /* Light Accents */
+    --muted: 0 0% 95%;
+    --muted-foreground: 240 5% 40%;
+
+    --accent: 150 100% 40%;
+    --accent-foreground: 0 0% 100%;
+    --accent-glow: 150 100% 50%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 240 5% 85%;
+    --input: 240 5% 90%;
+    --ring: 270 91% 55%;
+
+    /* Light Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(270 91% 55%), hsl(200 98% 45%));
+    --gradient-secondary: linear-gradient(135deg, hsl(200 98% 45%), hsl(150 100% 40%));
+    --gradient-accent: linear-gradient(135deg, hsl(150 100% 40%), hsl(270 91% 55%));
+    --gradient-dark: linear-gradient(180deg, hsl(0 0% 100%), hsl(0 0% 98%));
+    
+    /* Light Glow Effects */
+    --glow-primary: 0 0 20px hsl(270 91% 55% / 0.3), 0 0 40px hsl(270 91% 55% / 0.2);
+    --glow-secondary: 0 0 20px hsl(200 98% 45% / 0.3), 0 0 40px hsl(200 98% 45% / 0.2);
+    --glow-accent: 0 0 20px hsl(150 100% 40% / 0.3), 0 0 40px hsl(150 100% 40% / 0.2);
+    
+    /* Light Shadows */
+    --shadow-glass: 0 8px 32px 0 rgba(0, 0, 0, 0.08);
+    --shadow-elevated: 0 20px 60px rgba(0, 0, 0, 0.12);
+  }
 }
 
 @layer base {
@@ -74,8 +127,9 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
-    background: linear-gradient(180deg, hsl(240 10% 5%), hsl(240 10% 8%));
+    background: var(--gradient-dark);
     min-height: 100vh;
+    transition: background 0.3s ease, color 0.3s ease;
   }
   
   /* Glass Effect */
@@ -84,6 +138,11 @@ All colors MUST be HSL.
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .light .glass {
+    background: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(0, 0, 0, 0.1);
   }
   
   /* Glow Effects */

@@ -17,16 +17,31 @@ import tech5 from '@/assets/tech-5.jpg';
 
 const techImages = [tech1, tech2, tech3, tech4, tech5];
 
+const recentQuotes = [
+  { name: 'Rajesh Kumar', city: 'Mumbai', time: '2m ago' },
+  { name: 'Priya Sharma', city: 'Bangalore', time: '5m ago' },
+  { name: 'Amit Patel', city: 'Delhi', time: '8m ago' },
+  { name: 'Sneha Reddy', city: 'Hyderabad', time: '12m ago' },
+  { name: 'Vikram Singh', city: 'Pune', time: '15m ago' },
+];
+
 const Hero = () => {
   const [liveViewers, setLiveViewers] = useState(142);
   const [quoteRequests, setQuoteRequests] = useState(38);
   const [downloads, setDownloads] = useState(256);
   const [showDiscount, setShowDiscount] = useState(false);
+  const [currentQuoteIndex, setCurrentQuoteIndex] = useState(0);
+  const [showQuotePopup, setShowQuotePopup] = useState(false);
 
   useEffect(() => {
     const interval = setInterval(() => {
       setLiveViewers(prev => prev + Math.floor(Math.random() * 3));
-      if (Math.random() > 0.7) setQuoteRequests(prev => prev + 1);
+      if (Math.random() > 0.7) {
+        setQuoteRequests(prev => prev + 1);
+        setCurrentQuoteIndex(prev => (prev + 1) % recentQuotes.length);
+        setShowQuotePopup(true);
+        setTimeout(() => setShowQuotePopup(false), 4000);
+      }
     }, 3000);
 
     const discountTimer = setTimeout(() => setShowDiscount(true), 5000);
@@ -78,6 +93,30 @@ const Hero = () => {
           </div>
         </div>
       </div>
+
+      {/* Recent Quote Request Popup */}
+      {showQuotePopup && (
+        <div className="fixed bottom-8 left-8 z-50 animate-slide-in-left max-w-sm">
+          <div className="glass p-4 rounded-2xl glow-secondary border border-secondary/30">
+            <div className="flex items-center gap-3">
+              <div className="w-12 h-12 rounded-full bg-gradient-secondary flex items-center justify-center flex-shrink-0">
+                <Bell className="w-6 h-6 text-white" />
+              </div>
+              <div className="flex-1 min-w-0">
+                <div className="font-semibold text-foreground truncate">
+                  {recentQuotes[currentQuoteIndex].name}
+                </div>
+                <div className="text-sm text-muted-foreground">
+                  from {recentQuotes[currentQuoteIndex].city} requested a quote
+                </div>
+                <div className="text-xs text-accent mt-1">
+                  {recentQuotes[currentQuoteIndex].time}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Special Offer Popup */}
       {showDiscount && (

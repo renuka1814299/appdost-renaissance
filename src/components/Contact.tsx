@@ -2,12 +2,16 @@ import { Mail, Phone, MapPin, Send, Calendar } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
+import logo from '@/assets/appdost-logo.png';
 
 const Contact = () => {
   return (
     <section id="contact" className="py-24 relative overflow-hidden particle-bg">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16 space-y-4 animate-fade-in">
+        <div className="text-center mb-16 space-y-6 animate-fade-in">
+          <div className="flex justify-center mb-6">
+            <img src={logo} alt="AppDost" className="h-16 md:h-20 animate-float" />
+          </div>
           <h2 className="text-4xl md:text-6xl font-bold">
             <span className="gradient-text">Let's Build</span>
             <br />
