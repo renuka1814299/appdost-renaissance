@@ -1,4 +1,5 @@
 import { Sparkles, Github, Twitter, Linkedin, Mail } from 'lucide-react';
+import logo from '@/assets/appdost-logo.png';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -16,11 +17,12 @@ const Footer = () => {
         <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-12 mb-12">
           {/* Brand Section */}
           <div className="lg:col-span-2 space-y-6">
-            <div className="flex items-center gap-2 group cursor-pointer">
-              <div className="w-12 h-12 rounded-xl bg-gradient-primary flex items-center justify-center glow-primary group-hover:scale-110 transition-transform">
-                <Sparkles className="w-6 h-6 text-white" />
-              </div>
-              <span className="text-2xl font-bold gradient-text">AppDost</span>
+            <div className="flex items-center gap-3 cursor-pointer">
+              <img 
+                src={logo} 
+                alt="AppDost - Complete IT Solution" 
+                className="h-14 w-auto hover:scale-105 transition-transform"
+              />
             </div>
             <p className="text-muted-foreground max-w-sm">
               Building the future of digital experiences with AI-powered solutions 

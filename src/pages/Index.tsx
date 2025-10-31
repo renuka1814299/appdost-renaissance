@@ -8,7 +8,9 @@ import CTA from '@/components/CTA';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
 import AIChatbot from '@/components/AIChatbot';
-import ThemeToggle from '@/components/ThemeToggle';
+import Testimonials from '@/components/Testimonials';
+import FAQ from '@/components/FAQ';
+import BackToTop from '@/components/BackToTop';
 
 const Index = () => {
   return (
@@ -20,12 +22,14 @@ const Index = () => {
         <Portfolio />
         <TechStack />
         <DeploymentProcess />
+        <Testimonials />
+        <FAQ />
         <CTA />
         <Contact />
       </main>
       <Footer />
       <AIChatbot />
-      <ThemeToggle />
+      <BackToTop />
     </div>
   );
 };
