@@ -5,8 +5,6 @@ import {
   Carousel,
   CarouselContent,
   CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
 } from "@/components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
 import tech1 from '@/assets/tech-1.jpg';
@@ -54,12 +52,35 @@ const Hero = () => {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
-      {/* Animated Gradient Background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-primary/30 via-secondary/20 to-accent/30 animate-pulse-glow" />
-      <div className="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-background/50" />
+      {/* Full Screen Background Carousel */}
+      <div className="absolute inset-0 z-0">
+        <Carousel
+          plugins={[
+            Autoplay({
+              delay: 4000,
+            }),
+          ]}
+          className="w-full h-full"
+        >
+          <CarouselContent className="h-screen">
+            {techImages.map((image, index) => (
+              <CarouselItem key={index} className="h-full">
+                <div className="relative w-full h-full">
+                  <img 
+                    src={image} 
+                    alt={`Technology ${index + 1}`}
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-r from-background/95 via-background/70 to-background/40" />
+                </div>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+        </Carousel>
+      </div>
 
       {/* Live Stats Indicators */}
-      <div className="fixed top-24 right-4 z-50 space-y-3 animate-slide-in-right">
+      <div className="fixed top-24 left-4 z-50 space-y-3 animate-slide-in-left">
         {/* Live Viewers */}
         <div className="glass px-4 py-3 rounded-2xl flex items-center gap-3 glow-accent animate-float">
           <div className="w-10 h-10 rounded-full bg-accent/20 flex items-center justify-center">
@@ -148,10 +169,10 @@ const Hero = () => {
         </div>
       )}
 
+      {/* Right Content */}
       <div className="container mx-auto px-4 z-10">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* Left Content */}
-          <div className="space-y-8 animate-slide-in-left">
+        <div className="flex justify-end">
+          <div className="max-w-2xl space-y-8 animate-slide-in-right">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass glow-primary">
               <Sparkles className="w-4 h-4 text-primary animate-pulse-glow" />
               <span className="text-sm text-foreground/90">AI-Powered Development</span>
@@ -171,15 +192,15 @@ const Hero = () => {
 
             {/* Stats */}
             <div className="grid grid-cols-3 gap-6 pt-4">
-              <div className="text-center animate-fade-in">
+              <div className="text-center animate-fade-in glass rounded-2xl py-4 px-2">
                 <div className="text-3xl font-bold gradient-text">500+</div>
                 <div className="text-sm text-muted-foreground mt-1">Projects</div>
               </div>
-              <div className="text-center animate-fade-in" style={{ animationDelay: '0.2s' }}>
+              <div className="text-center animate-fade-in glass rounded-2xl py-4 px-2" style={{ animationDelay: '0.2s' }}>
                 <div className="text-3xl font-bold gradient-text">100+</div>
                 <div className="text-sm text-muted-foreground mt-1">Clients</div>
               </div>
-              <div className="text-center animate-fade-in" style={{ animationDelay: '0.4s' }}>
+              <div className="text-center animate-fade-in glass rounded-2xl py-4 px-2" style={{ animationDelay: '0.4s' }}>
                 <div className="text-3xl font-bold gradient-text">99%</div>
                 <div className="text-sm text-muted-foreground mt-1">Success</div>
               </div>
@@ -203,41 +224,6 @@ const Hero = () => {
                 View Portfolio
               </Button>
             </div>
-          </div>
-
-          {/* Right Content - Tech Carousel */}
-          <div className="relative animate-scale-in hidden lg:block">
-            <Carousel
-              plugins={[
-                Autoplay({
-                  delay: 3000,
-                }),
-              ]}
-              className="w-full"
-            >
-              <CarouselContent>
-                {techImages.map((image, index) => (
-                  <CarouselItem key={index}>
-                    <div className="relative glass rounded-3xl overflow-hidden glow-primary group">
-                      <img 
-                        src={image} 
-                        alt={`Technology ${index + 1}`}
-                        className="w-full h-[500px] object-cover group-hover:scale-110 transition-transform duration-700"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
-                      <div className="absolute bottom-6 left-6 right-6">
-                        <h3 className="text-2xl font-bold text-white mb-2">
-                          {['AI Neural Networks', 'Blockchain Technology', 'Cloud Computing', 'Mobile AR Apps', 'Quantum Computing'][index]}
-                        </h3>
-                        <p className="text-white/80">Next-generation technology solutions</p>
-                      </div>
-                    </div>
-                  </CarouselItem>
-                ))}
-              </CarouselContent>
-              <CarouselPrevious className="left-4 glass border-primary/50" />
-              <CarouselNext className="right-4 glass border-primary/50" />
-            </Carousel>
           </div>
         </div>
       </div>

@@ -2,10 +2,12 @@ import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Menu, X, Moon, Sun } from 'lucide-react';
 import logo from '@/assets/appdost-logo.png';
+import SignInModal from './SignInModal';
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isSignInOpen, setIsSignInOpen] = useState(false);
   const [theme, setTheme] = useState<'dark' | 'light'>('dark');
 
   useEffect(() => {
@@ -80,7 +82,11 @@ const Header = () => {
                 <Moon className="w-5 h-5 text-primary group-hover:animate-pulse-glow" />
               )}
             </button>
-            <Button variant="ghost" className="text-foreground hover:text-primary">
+            <Button 
+              variant="ghost" 
+              className="text-foreground hover:text-primary"
+              onClick={() => setIsSignInOpen(true)}
+            >
               Sign In
             </Button>
             <Button className="bg-gradient-primary text-white border-0 glow-primary hover:scale-105 transition-transform">
@@ -112,7 +118,14 @@ const Header = () => {
                 </a>
               ))}
               <div className="flex flex-col gap-3 mt-4">
-                <Button variant="ghost" className="w-full">
+                <Button 
+                  variant="ghost" 
+                  className="w-full"
+                  onClick={() => {
+                    setIsSignInOpen(true);
+                    setIsMobileMenuOpen(false);
+                  }}
+                >
                   Sign In
                 </Button>
                 <Button className="w-full bg-gradient-primary text-white border-0">
@@ -123,6 +136,8 @@ const Header = () => {
           </div>
         )}
       </div>
+
+      <SignInModal open={isSignInOpen} onOpenChange={setIsSignInOpen} />
     </header>
   );
 };
